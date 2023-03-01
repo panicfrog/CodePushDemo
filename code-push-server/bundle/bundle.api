@@ -1,0 +1,12 @@
+type Request {
+	Name string `path:"name,options=you|me|he|her"`
+}
+
+type Response {
+	Message string `json:"message"`
+}
+
+service bundle-api {
+	@handler BundleHandler
+	get /from/:name(Request) returns (Response)
+}
