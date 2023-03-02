@@ -6,7 +6,23 @@ type Response {
 	Message string `json:"message"`
 }
 
+type FileUploadRequest {
+	Hash         string `json:"hash,optional"`
+	Key          string `json:"key,optional"`
+	Size         int64  `json:"size,optional"`
+	PersistentID string `json:"persistentID,optional"`
+}
+
+type FileResponse {
+	Identity string `json:"identity"`
+	Size     int64  `json:"size"`
+}
+
 service bundle-api {
 	@handler BundleHandler
 	get /from/:name(Request) returns (Response)
+	
+	@handler FileUpload
+	post /file/upload(FileUploadRequest) returns (FileResponse)
+	
 }
