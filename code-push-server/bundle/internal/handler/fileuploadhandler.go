@@ -21,7 +21,7 @@ func FileUploadHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 			return
 		}
 
-		bucket := "AppBundle"
+		bucket := "appjsbundle"
 		putPolicy := storage.PutPolicy{
 			Scope: bucket,
 		}
@@ -38,7 +38,10 @@ func FileUploadHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 
 		file, fileHeader, err := r.FormFile("file")
 		err = formUploader.Put(context.Background(), &ret, upToken, req.Key, file, fileHeader.Size, &putExtra)
-
+		if err != nil {
+			httpx.ErrorCtx(r.Context(), w, err)
+			return
+		}
 		l := logic.NewFileUploadLogic(r.Context(), svcCtx)
 		req.Hash = ret.Hash
 		req.Key = ret.Key
