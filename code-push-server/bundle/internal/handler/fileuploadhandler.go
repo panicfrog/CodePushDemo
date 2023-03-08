@@ -2,12 +2,14 @@ package handler
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 
 	"code-push-server/bundle/internal/logic"
 	"code-push-server/bundle/internal/svc"
 	"code-push-server/bundle/internal/types"
 
+	"github.com/google/uuid"
 	"github.com/qiniu/go-sdk/v7/auth/qbox"
 	"github.com/qiniu/go-sdk/v7/storage"
 	"github.com/zeromicro/go-zero/rest/httpx"
@@ -23,7 +25,8 @@ func FileUploadHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 
 		bucket := "appjsbundle"
 		putPolicy := storage.PutPolicy{
-			Scope: bucket,
+			Scope:      bucket,
+			FsizeLimit: svcCtx.Config.MaxBytes,
 		}
 		mac := qbox.NewMac(svcCtx.Config.AccessKey, svcCtx.Config.SecretKey)
 		upToken := putPolicy.UploadToken(mac)
@@ -37,11 +40,23 @@ func FileUploadHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		putExtra := storage.PutExtra{}
 
 		file, fileHeader, err := r.FormFile("file")
-		err = formUploader.Put(context.Background(), &ret, upToken, req.Key, file, fileHeader.Size, &putExtra)
 		if err != nil {
 			httpx.ErrorCtx(r.Context(), w, err)
 			return
 		}
+		defer file.Close()
+		// 生成唯一文件名
+		uuid := uuid.New().String()
+		key := req.Key
+		if len(key) <= 0 {
+			key = fmt.Sprintf("%s_%s", uuid, fileHeader.Filename)
+		}
+		err = formUploader.Put(context.Background(), &ret, upToken, key, file, fileHeader.Size, &putExtra)
+		if err != nil {
+			httpx.ErrorCtx(r.Context(), w, err)
+			return
+		}
+
 		l := logic.NewFileUploadLogic(r.Context(), svcCtx)
 		req.Hash = ret.Hash
 		req.Key = ret.Key

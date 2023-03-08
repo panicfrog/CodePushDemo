@@ -24,9 +24,9 @@ func NewFileUploadLogic(ctx context.Context, svcCtx *svc.ServiceContext) *FileUp
 }
 
 func (l *FileUploadLogic) FileUpload(req *types.FileUploadRequest) (resp *types.FileResponse, err error) {
-	// todo: add your logic here and delete this line
 	return &types.FileResponse{
-		Identity: req.Hash,
-		Size:     req.Size,
+		Hash: req.Hash,
+		Key:  req.Key,
+		Size: req.Size,
 	}, nil
 }

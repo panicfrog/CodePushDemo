@@ -17,6 +17,7 @@ type FileUploadRequest struct {
 }
 
 type FileResponse struct {
-	Identity string `json:"identity"`
-	Size     int64  `json:"size"`
+	Hash string `json:"hash"`
+	Size int64  `json:"size"`
+	Key  string `json:"key"`
 }

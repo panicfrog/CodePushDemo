@@ -2,7 +2,11 @@ module code-push-server
 
 go 1.20
 
-require github.com/zeromicro/go-zero v1.4.4
+require (
+	github.com/google/uuid v1.3.0
+	github.com/qiniu/go-sdk/v7 v7.14.0
+	github.com/zeromicro/go-zero v1.4.4
+)
 
 require (
 	github.com/beorn7/perks v1.0.1 // indirect
@@ -15,7 +19,6 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.4.3 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/google/pprof v0.0.0-20211214055906-6f57359322fd // indirect
-	github.com/google/uuid v1.3.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.7.0 // indirect
 	github.com/mattn/go-colorable v0.1.9 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
@@ -26,7 +29,6 @@ require (
 	github.com/prometheus/client_model v0.2.0 // indirect
 	github.com/prometheus/common v0.37.0 // indirect
 	github.com/prometheus/procfs v0.8.0 // indirect
-	github.com/qiniu/go-sdk/v7 v7.14.0 // indirect
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	go.opentelemetry.io/otel v1.10.0 // indirect
 	go.opentelemetry.io/otel/exporters/jaeger v1.10.0 // indirect

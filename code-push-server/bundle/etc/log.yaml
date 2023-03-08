@@ -1,0 +1,7 @@
+ServiceName: bundle
+# Mode: console
+# Path: logs
+# Level: info
+# Compress: true
+# KeepDays: 30
+# StackCooldownMillis: 100
