@@ -32,6 +32,6 @@ func main() {
 	ctx := svc.NewServiceContext(c)
 	handler.RegisterHandlers(server, ctx)
 
-	fmt.Printf("Starting server at %s:%d with AK: %s,SK: %s...\n", c.Host, c.Port, c.AccessKey, c.SecretKey)
+	fmt.Printf("Starting server at %s:%d...  \nwith \n  AK: %s\n  SK: %s\n", c.Host, c.Port, c.AccessKey, c.SecretKey)
 	server.Start()
 }

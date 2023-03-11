@@ -5,7 +5,7 @@ MaxBytes: 26214400
 AccessKey: 
 SecretKey:
 Mysql:
-  DataSource: bundleuser@bundlepassword123@tcp(localhost)/bundle?charse=utf8mb4
+  DataSource: bundleuser:bundlepassword123@tcp(localhost:3306)/bundle?charset=utf8mb4
 CacheRedis:
 - Host: 127.0.0.1:6379
   Pass:
