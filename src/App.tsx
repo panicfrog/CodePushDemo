@@ -15,6 +15,7 @@ import {
   useColorScheme,
   View,
   ViewStyle,
+  Image
 } from 'react-native';
 
 import color  from './style/Color';
@@ -129,9 +130,20 @@ function BannerView(props: BannerViewProps) {
     <View
       style={{
         backgroundColor: color.backgroundPrimaryColor,
-        height: 100
+        height: 100,
+        paddingHorizontal: 20,
       }}
-    ></View>
+    >
+      <Image 
+        source={require('./assets/banner.png')}
+        style={{
+          width: '100%',
+          height: '100%',
+          borderRadius: 10
+        }}
+        resizeMode='cover'
+      />
+    </View>
   );
 }
 
