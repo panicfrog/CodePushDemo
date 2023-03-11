@@ -17,6 +17,6 @@ CREATE TABLE IF NOT EXISTS `version_info` (
   `base_version` varchar(255) NOT NULL,
   `create_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-  -- FOREIGN KEY (`file_id`) REFERENCES `file`(`id`) ON DELETE CASCADE
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`file_id`) REFERENCES `file`(`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
